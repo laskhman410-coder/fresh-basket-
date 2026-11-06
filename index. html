@@ -1,1 +1,50 @@
-index. html
+index. html<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fresh Basket</title>
+<style>
+body{font-family:Arial;margin:0;background:#f1fff1;text-align:center}
+header{background:#168b39;color:white;padding:25px}
+h1{margin:0}
+.box{background:white;margin:15px;padding:20px;border-radius:12px}
+button{background:#168b39;color:white;border:0;padding:12px 20px;border-radius:8px}
+input{padding:12px;margin:8px;width:80%;border:1px solid #ccc}
+</style>
+</head>
+<body>
+<header>
+<h1>🥬 Fresh Basket</h1>
+<p>তাজা সবজি আপনার বাড়িতে</p>
+</header>
+
+<div class="box">
+<h2>আমাদের পরিষেবা</h2>
+<p>রাজাহাট ও নিউটাউন</p>
+<p>তাজা সবজি বাড়িতে ডেলিভারি</p>
+</div>
+
+<div class="box">
+<h2>অর্ডার করুন</h2>
+<input id="name" placeholder="আপনার নাম">
+<input id="address" placeholder="আপনার ঠিকানা">
+<input id="items" placeholder="কোন সবজি লাগবে">
+<input id="phone" placeholder="মোবাইল নম্বর">
+<br><br>
+<button onclick="order()">WhatsApp-এ অর্ডার করুন</button>
+</div>
+
+<script>
+function order(){
+let n=document.getElementById('name').value;
+let a=document.getElementById('address').value;
+let i=document.getElementById('items').value;
+let p=document.getElementById('phone').value;
+if(!n||!a||!i||!p){alert('সব তথ্য পূরণ করুন');return;}
+let msg=`Fresh Basket Order%0AName: ${n}%0AAddress: ${a}%0AItems: ${i}%0APhone: ${p}`;
+window.open('https://wa.me/917439014156?text='+msg,'_blank');
+}
+</script>
+</body>
+</html>
