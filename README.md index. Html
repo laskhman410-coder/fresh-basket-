@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fresh Basket</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f8f1;
+}
+header {
+  background: #138b45;
+  color: white;
+  text-align: center;
+  padding: 22px;
+}
+header h1 { margin: 0; }
+.banner {
+  text-align: center;
+  padding: 18px;
+  background: #d9f5dc;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+  padding: 12px;
+}
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px #ccc;
+}
+.card .emoji { font-size: 40px; }
+button {
+  background: #138b45;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.cart {
+  background: white;
+  margin: 12px;
+  padding: 15px;
+  border-radius: 12px;
+}
+input, textarea {
+  width: 95%;
+  padding: 10px;
+  margin: 7px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.order {
+  width: 100%;
+  background: #159447;
+  font-size: 17px;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #138b45;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🥦 FRESH BASKET</h1>
+<p>Fresh Vegetables & Fruits</p>
+</header>
+
+<div class="banner">
+<h2>প্রতিদিন টাটকা সবজি ও ফল</h2>
+<p>ডেলিভারি: রাজারহাট ও নিউটাউন</p>
+</div>
+
+<h2 style="text-align:center">আমাদের পণ্য</h2>
+
+<div class="products" id="products"></div>
+
+<div class="cart">
+<h2>🛒 আপনার Cart</h2>
+<div id="cartItems">এখনও কিছু যোগ করেননি।</div>
+<h3>মোট: ₹<span id="total">0</span></h3>
+
+<h3>ডেলিভারির তথ্য</h3>
+
+<input id="name" placeholder="আপনার নাম">
+<input id="phone" placeholder="মোবাইল নম্বর" type="tel">
+<textarea id="address" placeholder="সম্পূর্ণ ঠিকানা"></textarea>
+
+<button class="order" onclick="placeOrder()">
+WhatsApp-এ অর্ডার করুন
+</button>
+</div>
+
+<footer>
+<p>FRESH BASKET</p>
+<p>Contact: 7439014156</p>
+<p>Rajarhat & New Town</p>
+</footer>
+
+<script>
+
+const products = [
+ {name:"আলু",price:30,emoji:"🥔"},
+ {name:"পেঁয়াজ",price:40,emoji:"🧅"},
+ {name:"টমেটো",price:40,emoji:"🍅"},
+ {name:"বেগুন",price:40,emoji:"🍆"},
+ {name:"ফুলকপি",price:35,emoji:"🥦"},
+ {name:"গাজর",price:50,emoji:"🥕"},
+ {name:"কলা",price:50,emoji:"🍌"},
+ {name:"আপেল",price:120,emoji:"🍎"},
+ {name:"কমলালেবু",price:80,emoji:"🍊"},
+ {name:"শসা",price:30,emoji:"🥒"}
+];
+
+let cart = [];
+
+function showProducts() {
+ const box = document.getElementById("products");
+
+ products.forEach((p,i) => {
+  box.innerHTML += `
+   <div class="card">
+    <div class="emoji">${p.emoji}</div>
+    <h3>${p.name}</h3>
+    <p>₹${p.price} / কেজি</p>
+    <button onclick="addCart(${i})">Add to Cart</button>
+   </div>
+  `;
+ });
+}
+
+function addCart(i) {
+ let item = cart.find(x => x.name === products[i].name);
+
+ if(item) {
+  item.qty++;
+ } else {
+  cart.push({...products[i],qty
